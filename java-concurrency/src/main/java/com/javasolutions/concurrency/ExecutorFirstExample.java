@@ -12,8 +12,8 @@ public class ExecutorFirstExample {
 
         // Callable, return a future, submit and run the task async
         Future<Integer> futureTask1 = executor.submit(() -> {
-            System.out.println("I'm Callable task.");
-            return 1 + 1;
+            System.out.println("Inside Callable task.");
+            return 1001;
         });
 
         /* Before Java 8
@@ -33,14 +33,11 @@ public class ExecutorFirstExample {
 
         try {
 
-            otherTask("Before Future Result");
 
             //block until future returned a result, timeout if future take more than 5 seconds to return the result
             Integer result = futureTask1.get(5, TimeUnit.SECONDS);
 
-            System.out.println("Get future result : " + result);
-
-            otherTask("After Future Result");
+            System.out.println("Get future result: " + result);
 
 
         } catch (InterruptedException e) {// thread was interrupted
@@ -58,7 +55,5 @@ public class ExecutorFirstExample {
 
     }
 
-    private static void otherTask(String name) {
-        System.out.println("I'm other task! " + name);
-    }
+
 }
