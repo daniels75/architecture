@@ -2,7 +2,7 @@ package com.javasolutions.concurrency;
 
 import java.util.concurrent.*;
 
-public class ExecutorExample1 {
+public class ExecutorFirstExample {
     public static void main(String[] args) {
 
         ExecutorService executor = Executors.newFixedThreadPool(5);
