@@ -8,12 +8,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class ExecutorSecondExample {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         ExecutorService executor = Executors.newCachedThreadPool();
 
         List<Callable<Integer>> listOfCallable = Arrays.asList(
-                () -> 1,
+                () -> {
+                    return 1;},
                 () -> 2,
                 () -> 3);
 
@@ -48,7 +49,8 @@ public class ExecutorSecondExample {
 
             int sum = futures.stream().map(f -> {
                 try {
-                    return f.get();
+                    System.out.println(f.get() + " " + f.isDone());
+                    return f.get().intValue();
                 } catch (Exception e) {
                     throw new IllegalStateException(e);
                 }
