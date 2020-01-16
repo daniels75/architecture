@@ -26,6 +26,7 @@ public class ExecutorExample {
         public void execute(Runnable command) {
             final Thread taskExecutor = new Thread(command);
             msg("ThreadPerTaskExecutor, thread name: " + taskExecutor.getName());
+            msg(Thread.currentThread().getName());
             taskExecutor.start();
         }
     }
