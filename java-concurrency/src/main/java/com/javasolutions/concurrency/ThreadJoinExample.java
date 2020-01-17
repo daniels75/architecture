@@ -29,14 +29,14 @@ public class ThreadJoinExample {
         msg("Starting first thread");
         firstThread.start();
 
-        msg("Waiting for first thread to complete");
+        msg("Waiting only 1000ms for first thread to complete");
         try {
             firstThread.join(1000);
         } catch (InterruptedException e) {
             throw new IllegalStateException(e);
         }
 
-        msg("Starting second thread");
+        msg("Back to the main thread - Starting second thread");
         secondThread.start();
     }
 
