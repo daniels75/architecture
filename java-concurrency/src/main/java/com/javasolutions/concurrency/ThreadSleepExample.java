@@ -19,7 +19,7 @@ public class ThreadSleepExample {
     private static Runnable createRunnable(List<String> messages) {
         return () -> {
                 for(String message : messages) {
-                    msg(message);
+                    msg("Message: " + message + " Thread name: " + Thread.currentThread().getName());
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -32,4 +32,5 @@ public class ThreadSleepExample {
     private static void msg(String message) {
         System.out.println(message);
     }
+
 }
