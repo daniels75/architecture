@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 public class ExecutorServiceExample2 {
     public static void main(String[] args) {
         msg("Current thread name: " + Thread.currentThread().getName());
-        ExecutorService executorService = Executors.newScheduledThreadPool(3);
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
         executorService.submit(() -> {
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -19,7 +19,7 @@ public class ExecutorServiceExample2 {
 
         executorService.submit(() -> {
             try {
-                Thread.sleep(200);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

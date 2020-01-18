@@ -6,13 +6,14 @@ import java.util.concurrent.Executors;
 public class ExecutorServiceExample {
     public static void main(String[] args) {
         msg("Current thread name: " + Thread.currentThread().getName());
-        ExecutorService executorService = Executors.newScheduledThreadPool(3);
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(() ->
             msg("1st - Thread called from executor service name: "
                     + Thread.currentThread().getName()));
 
         executorService.submit(() -> msg("2nd - Thread called from executor service name: "
                 + Thread.currentThread().getName()));
+
         executorService.shutdown();
     }
 
