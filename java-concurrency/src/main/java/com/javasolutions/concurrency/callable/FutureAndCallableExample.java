@@ -19,6 +19,11 @@ public class FutureAndCallableExample {
         // This line executes immediately
         msg("Do something else while callable is getting executed");
 
+        while(!future.isDone()) {
+            msg("Task is still not done...");
+            Thread.sleep(500);
+        }
+
         msg("Retrieve the result of the future");
         // Future.get() blocks until the result is available
         msg("Result: " + future.get());
