@@ -11,7 +11,6 @@ public class ScheduledExecutorsPeriodicExample {
 
         Runnable task = () -> msg("Executing, time: " + LocalDateTime.now());
 
-
         System.out.println("scheduling task to be executed every 3 seconds with an initial delay of 0 seconds");
         scheduledExecutorService.scheduleAtFixedRate(task, 0,3, TimeUnit.SECONDS);
     }
