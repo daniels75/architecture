@@ -10,6 +10,7 @@ public class RunnableExample implements Runnable {
 
         Thread thread2 = new Thread(new RunnableExample());
         thread2.start();
+
     }
 
     @Override
