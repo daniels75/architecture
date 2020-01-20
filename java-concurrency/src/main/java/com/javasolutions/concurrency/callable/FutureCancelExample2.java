@@ -18,7 +18,7 @@ public class FutureCancelExample2 {
         while(!future.isDone()) {
             msg("task in progress...");
             Thread.sleep(200);
-            
+
             long nanoTime = System.nanoTime();
             double elapsedTimeInSec = (nanoTime - startTime)/1000000000.0;
 
