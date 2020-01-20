@@ -26,10 +26,13 @@ public class InvokeAnyExample {
 
         msg("result: " + executorService.invokeAny(Arrays.asList(task1, task2, task3)));
 
+
         executorService.shutdown();
+
     }
 
     private static void msg(String message) {
         System.out.println(message);
     }
+
 }
