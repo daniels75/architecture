@@ -11,12 +11,13 @@ public class ThreadJoinExample2 extends Thread {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        msg("Current thread: " + Thread.currentThread().getName());
         Thread simpleThread = new ThreadJoinExample2(2);
         simpleThread.start();
         msg("Invoking join");
         // main thread is "waiting forever" for simpleThread
         simpleThread.join();
-        msg("Returned from join");
+        msg("Returned from join - again thread: " + Thread.currentThread().getName());
     }
 
     private static void msg(String message) {
