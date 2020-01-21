@@ -3,12 +3,14 @@ package com.javasolutions.concurrency.threadsync;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class RaceConditionExample {
+public class ReentrantLockCounterExample {
+
     public static void main(String[] args) throws InterruptedException {
         final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-        final Counter counter = new Counter();
+        final CounterWithReentrantLock counter = new CounterWithReentrantLock();
 
         for(int i = 0; i < 1000; i++) {
             executorService.submit(() -> counter.increment());
@@ -20,16 +22,17 @@ public class RaceConditionExample {
         msg("Final count is : " + counter.getCount());
     }
 
-    static class Counter {
+    static class CounterWithReentrantLock {
 
-        volatile int  count = 0;
+        int count;
+        private final ReentrantLock lock = new ReentrantLock();
+
         public void increment() {
-            count = count + 1;
-        }
-
-        public synchronized void incrementFixed() {
-            synchronized(this) {
+            lock.lock();
+            try {
                 count = count + 1;
+            } finally {
+                lock.unlock();
             }
         }
 
