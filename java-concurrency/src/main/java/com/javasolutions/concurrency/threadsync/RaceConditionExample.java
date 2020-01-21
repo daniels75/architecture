@@ -29,6 +29,12 @@ public class RaceConditionExample {
             }
         }
 
+        public synchronized void incrementFixed() {
+            synchronized(this) {
+                count = count + 1;
+            }
+        }
+
         public int getCount() {
             return count;
         }
