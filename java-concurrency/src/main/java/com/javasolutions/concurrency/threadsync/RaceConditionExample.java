@@ -15,16 +15,18 @@ public class RaceConditionExample {
         }
 
         executorService.shutdown();
-        executorService.awaitTermination(60, TimeUnit.SECONDS);
+        executorService.awaitTermination(30, TimeUnit.SECONDS);
 
         msg("Final count is : " + counter.getCount());
     }
 
     static class Counter {
 
-        int count = 0;
+        volatile int  count = 0;
         public void increment() {
-            count = count + 1;
+            synchronized(this) {
+                count = count + 1;
+            }
         }
 
         public int getCount() {
@@ -32,7 +34,7 @@ public class RaceConditionExample {
         }
 
     }
-    
+
     private static void msg(String message) {
         System.out.println(message);
     }
