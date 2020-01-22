@@ -38,18 +38,19 @@ public class ExeampleOfExecutors {
         for (int i = 0; i < 10; i++) {
             final Future<UUID> submittedUUID = cachedThreadPool.submit(() -> {
                 UUID randomUUID = UUID.randomUUID();
-                msg("UUID " + randomUUID + " from " + Thread.currentThread().getName());
+                msg(threadName() + "UUID " + randomUUID);
                 return randomUUID;
             });
             uuids.add(submittedUUID);
         }
         cachedThreadPool.execute(() -> uuids.forEach((f) -> {
             try {
-                msg("Result " + f.get() + " from thread " + Thread.currentThread().getName());
+                msg(threadName() + "Result " + f.get());
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }));
+
         cachedThreadPool.shutdown();
         try {
             cachedThreadPool.awaitTermination(4, TimeUnit.SECONDS);
