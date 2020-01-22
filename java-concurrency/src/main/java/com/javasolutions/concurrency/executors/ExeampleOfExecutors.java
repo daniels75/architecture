@@ -9,12 +9,13 @@ public class ExeampleOfExecutors {
 
     public static void main(String[] args) {
         usingSingleThreadExecutor();
-        usingCachedThreadPool();
-        usingFixedThreadPool();
-        usingScheduledThreadPool();
-        usingSingleTreadScheduledExecutor();
-        usingWorkStealingThreadPool();
+        //usingCachedThreadPool();
+        //usingFixedThreadPool();
+        //usingScheduledThreadPool();
+        //usingSingleTreadScheduledExecutor();
+        //usingWorkStealingThreadPool();
     }
+
     public static void usingSingleThreadExecutor() {
         msg("=== SingleThreadExecutor ===");
         final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
