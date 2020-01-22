@@ -155,7 +155,8 @@ public class ExeampleOfExecutors {
 
 
     private static void msg(String message) {
-        msg(message);
+        System.out.println(message);
     }
+
 
 }
