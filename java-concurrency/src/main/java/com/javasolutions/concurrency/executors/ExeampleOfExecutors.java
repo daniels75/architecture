@@ -68,14 +68,14 @@ public class ExeampleOfExecutors {
         for (int i = 0; i < 20; i++) {
             Future<UUID> submitted = fixedPool.submit(() -> {
                 UUID randomUUID = UUID.randomUUID();
-                msg("UUID " + randomUUID + " from " + Thread.currentThread().getName());
+                msg(threadName() + "UUID " + randomUUID);
                 return randomUUID;
             });
             uuids.add(submitted);
         }
         fixedPool.execute(() -> uuids.forEach((f) -> {
             try {
-                msg("Result " + f.get() + " from " + Thread.currentThread().getName());
+                msg(threadName() + "Result " + f.get());
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
