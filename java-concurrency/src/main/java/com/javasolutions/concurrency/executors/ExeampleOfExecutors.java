@@ -1,5 +1,6 @@
 package com.javasolutions.concurrency.executors;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -8,8 +9,8 @@ import java.util.concurrent.*;
 public class ExeampleOfExecutors {
 
     public static void main(String[] args) {
-        usingSingleThreadExecutor();
-        //usingCachedThreadPool();
+        // usingSingleThreadExecutor();
+        usingCachedThreadPool();
         //usingFixedThreadPool();
         //usingScheduledThreadPool();
         //usingSingleTreadScheduledExecutor();
@@ -19,8 +20,8 @@ public class ExeampleOfExecutors {
     public static void usingSingleThreadExecutor() {
         msg("=== SingleThreadExecutor ===");
         final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-        singleThreadExecutor.execute(() -> msg("Print this."));
-        singleThreadExecutor.execute(() -> msg("and this one to."));
+        singleThreadExecutor.execute(() -> msg(threadName() + "Task1"));
+        singleThreadExecutor.execute(() -> msg(threadName() + "Task2"));
         singleThreadExecutor.shutdown();
         try {
             singleThreadExecutor.awaitTermination(4, TimeUnit.SECONDS);
@@ -33,7 +34,7 @@ public class ExeampleOfExecutors {
     public static void usingCachedThreadPool() {
         msg("=== CachedThreadPool ===");
         final ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        List<Future<UUID>> uuids = new LinkedList<Future<UUID>>();
+        List<Future<UUID>> uuids = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             final Future<UUID> submittedUUID = cachedThreadPool.submit(() -> {
                 UUID randomUUID = UUID.randomUUID();
@@ -62,7 +63,7 @@ public class ExeampleOfExecutors {
     public static void usingFixedThreadPool() {
         msg("=== FixedThreadPool ===");
         final ExecutorService fixedPool = Executors.newFixedThreadPool(4);
-        List<Future<UUID>> uuids = new LinkedList<Future<UUID>>();
+        List<Future<UUID>> uuids = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Future<UUID> submitted = fixedPool.submit(() -> {
                 UUID randomUUID = UUID.randomUUID();
@@ -156,6 +157,9 @@ public class ExeampleOfExecutors {
 
     private static void msg(String message) {
         System.out.println(message);
+    }
+    public static String threadName() {
+        return " [Tread: " + Thread.currentThread().getName()+ "] ";
     }
 
 
