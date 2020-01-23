@@ -43,21 +43,7 @@ public class ExeampleOfExecutors {
             });
             uuids.add(submittedUUID);
         }
-        cachedThreadPool.execute(() -> uuids.forEach((f) -> {
-            try {
-                msg(threadName() + "Result " + f.get());
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-        }));
-
-        cachedThreadPool.shutdown();
-        try {
-            cachedThreadPool.awaitTermination(4, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        msg("\n\n");
+        printTaskValues(cachedThreadPool, uuids);
 
     }
 
@@ -73,20 +59,7 @@ public class ExeampleOfExecutors {
             });
             uuids.add(submitted);
         }
-        fixedPool.execute(() -> uuids.forEach((f) -> {
-            try {
-                msg(threadName() + "Result " + f.get());
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-        }));
-        fixedPool.shutdown();
-        try {
-            fixedPool.awaitTermination(4, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        msg("\n\n");
+        printTaskValues(fixedPool, uuids);
     }
 
     public static void usingScheduledThreadPool() {
@@ -155,6 +128,23 @@ public class ExeampleOfExecutors {
         msg("\n\n");
     }
 
+    private static void printTaskValues(ExecutorService cachedThreadPool, List<Future<UUID>> uuids) {
+        cachedThreadPool.execute(() -> uuids.forEach((f) -> {
+            try {
+                msg(threadName() + "Result " + f.get());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }));
+
+        cachedThreadPool.shutdown();
+        try {
+            cachedThreadPool.awaitTermination(4, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        msg("\n\n");
+    }
 
     private static void msg(String message) {
         System.out.println(message);
